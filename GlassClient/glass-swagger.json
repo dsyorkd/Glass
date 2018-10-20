@@ -1,0 +1,176 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "Glass Api"
+  },
+  "paths": {
+    "/api/Sensor": {
+      "get": {
+        "tags": [ "Sensor" ],
+        "operationId": "ApiSensorGet",
+        "consumes": [],
+        "produces": [ "text/plain", "application/json", "text/json" ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "uniqueItems": false,
+              "type": "array",
+              "items": { "$ref": "#/definitions/Sensor" }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [ "Sensor" ],
+        "operationId": "ApiSensorPost",
+        "consumes": [ "application/json-patch+json", "application/json", "text/json", "application/*+json" ],
+        "produces": [ "text/plain", "application/json", "text/json" ],
+        "parameters": [
+          {
+            "name": "sensor",
+            "in": "body",
+            "required": false,
+            "schema": { "$ref": "#/definitions/Sensor" }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/Sensor" }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": { "$ref": "#/definitions/ProblemDetails" }
+          },
+          "0": { "schema": { "$ref": "#/definitions/ProblemDetails" } }
+        }
+      }
+    },
+    "/api/Sensor/{id}": {
+      "get": {
+        "tags": [ "Sensor" ],
+        "operationId": "ApiSensorByIdGet",
+        "consumes": [],
+        "produces": [ "text/plain", "application/json", "text/json" ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/Sensor" }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": { "$ref": "#/definitions/ProblemDetails" }
+          },
+          "0": { "schema": { "$ref": "#/definitions/ProblemDetails" } }
+        }
+      },
+      "put": {
+        "tags": [ "Sensor" ],
+        "operationId": "ApiSensorByIdPut",
+        "consumes": [ "application/json-patch+json", "application/json", "text/json", "application/*+json" ],
+        "produces": [ "text/plain", "application/json", "text/json" ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "sensor",
+            "in": "body",
+            "required": false,
+            "schema": { "$ref": "#/definitions/Sensor" }
+          }
+        ],
+        "responses": {
+          "204": { "description": "Success" },
+          "404": {
+            "description": "Not Found",
+            "schema": { "$ref": "#/definitions/ProblemDetails" }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": { "$ref": "#/definitions/ProblemDetails" }
+          },
+          "0": { "schema": { "$ref": "#/definitions/ProblemDetails" } }
+        }
+      },
+      "delete": {
+        "tags": [ "Sensor" ],
+        "operationId": "ApiSensorByIdDelete",
+        "consumes": [],
+        "produces": [ "text/plain", "application/json", "text/json" ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/Sensor" }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": { "$ref": "#/definitions/ProblemDetails" }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": { "$ref": "#/definitions/ProblemDetails" }
+          },
+          "0": { "schema": { "$ref": "#/definitions/ProblemDetails" } }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Sensor": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "name": { "type": "string" },
+        "manufacturer": { "type": "string" },
+        "serial": { "type": "string" },
+        "hardwareId": { "type": "string" },
+        "address": { "type": "string" },
+        "type": { "type": "string" },
+        "class": { "type": "string" }
+      }
+    },
+    "ProblemDetails": {
+      "type": "object",
+      "properties": {
+        "type": { "type": "string" },
+        "title": { "type": "string" },
+        "status": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "detail": { "type": "string" },
+        "instance": { "type": "string" }
+      },
+      "additionalProperties": { "type": "object" }
+    }
+  }
+}

@@ -4,4 +4,14 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="NSwag.MSBuild" Version="11.20.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  <Target Name="Nswag" BeforeTargets="Build">
+    <Exec Command="$(NSwagExe_Core21) swagger2csclient /input:glass-swagger.json /namespace:$(RootNamespace) /InjectHttpClient:true /UseBaseUrl:false /output:GlassClient.cs" />
+  </Target>
 </Project>
+

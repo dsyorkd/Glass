@@ -24,10 +24,9 @@ namespace GlassApi {
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices (IServiceCollection services) {
-            services.AddMvc ().SetCompatibilityVersion (CompatibilityVersion.Version_2_2);
-            var connection = "Data Source=Glass.db";
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddDbContext<GlassDbContext>
-                (options => options.UseSqlite (connection));
+                (options => options.UseSqlite (Configuration.GetConnectionString("DefaultConnection")));
             services.AddSwaggerGen (c => {
                 c.SwaggerDoc ("v1", new Info { Title = "Glass Api", Version = "v1" });
             });

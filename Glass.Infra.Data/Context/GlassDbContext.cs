@@ -1,11 +1,25 @@
+using System;
+using Glass.Domain.Models;
+using Glass.Infra.Data.Mappings;
+using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace GlassApi.Models {
-    public class GlassDbContext : DbContext {
+namespace GlassApi.Infra.Data.Context
+{
+    public class GlassDbContext : DbContext
+    {
         public DbSet<Sensor> Sensors { get; set; }
 
-        public GlassDbContext (DbContextOptions<GlassDbContext> options) : base (options) { }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new SensorMap());
+        }
+
+
+
+        public GlassDbContext(DbContextOptions<GlassDbContext> options) : base(options) { }
 
     }
 }
